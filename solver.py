@@ -12,9 +12,10 @@ def check_location(grid, x, y) -> bool:
     else:
         return False
 
+
 def check_row(grid, y) -> bool:
     """Given the current grid and a row, returns True if that row is valid."""
-    checked = [False for _ in range(9)]
+    checked = [False]*9
     for n in grid[y]:
         if n == 0:
             continue
@@ -23,3 +24,44 @@ def check_row(grid, y) -> bool:
         else:
             return False
     return True # only hit if it passes through the whole row with no duplicates
+
+
+def check_col(grid, x) -> bool:
+    """Given the current grid and a column, returns True if that column is valid."""
+    checked = [False]*9
+    for i in range(9):
+        if grid[i][x] == 0:
+            continue
+        if not checked[grid[i][x]-1]:
+            checked[grid[i][x]-1] = True
+        else:
+            return False
+    return True
+
+
+def check_box(grid, x, y) -> bool:
+    """Determines which of the 9 boxes a location lies in and checks if that box is valid."""
+    if x < 3:
+        x_box = 0
+    elif x < 6:
+        x_box = 1
+    else:
+        x_box = 2
+
+    if y < 3:
+        y_box = 0
+    elif y < 6:
+        y_box = 1
+    else:
+        y_box = 2
+
+    box = [grid[3*y_box + j][3*x_box + i] for i in range(3) for j in range(3)]
+    checked = [False]*9
+    for n in box:
+        if n == 0:
+            continue
+        if not checked[n-1]:
+            checked[n-1] = True
+        else:
+            return False
+    return True

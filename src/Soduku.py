@@ -1,5 +1,9 @@
 import cv2
+import imutils
 import numpy as np
+
+sudoku_v_cells = 9
+sudoku_h_cells = 9
 
 # Preprocess image function:
 # Convert the image to grayscale
@@ -31,7 +35,7 @@ def biggest_contour(contours):
         if area > 50:
             peri = cv2.arcLength(contour, True)
             approx = cv2.approxPolyDP(contour, 0.02 * peri, True)
-            if area > max_area & len(approx) == 4:
+            if area > max_area and len(approx) == 4:
                 max_area = area
                 biggest_contour = approx
     return biggest_contour,max_area
@@ -48,11 +52,20 @@ def reframe(points):
     diff = np.diff(points, axis=1)
     new_points[1] = points[np.argmin(diff)]
     new_points[2] = points[np.argmax(diff)]
-    print("original points: ")
-    print(points)
-    print("new points: ")
-    print(new_points)
+    print("original points: \n", points)
+    print("new points: \n", new_points)
     return new_points
+
+# Split sudoku into sudoku_v_cells * sudoku_h_cells cells
+def crop_cell(img):
+    rows = np.vsplit(img,sudoku_v_cells)
+    cells=[]
+    for r in rows:
+        cols= np.hsplit(r,sudoku_h_cells)
+        for cell in cols:
+            cells.append(cell)
+    print("number of cells: ", len(cells))
+    return cells
 
 # Stack images
 # Use for demo only
@@ -83,11 +96,9 @@ def img_stack(img_array,scale):
         ver = hor
     return ver
 
-
-img_path = 'input/99.jpg'
-img_h = 550
-img_w = 550
-find_sudoku = False
+img_path = 'input/3.jpg'
+img_h = 540
+img_w = 540
 
 img = cv2.imread(img_path)
 img = cv2.resize(img, (img_w, img_h))
@@ -102,7 +113,6 @@ cv2.drawContours(img_contours, contours, -1, (155, 0, 155), 3)
 
 biggest, max_area = biggest_contour(contours) 
 if biggest.size != 0:
-    find_sudoku == True
     biggest = reframe(biggest)
     cv2.drawContours(img_biggest_contour, biggest, -1, (0, 255, 0), 15) 
     #prepare ponits before warp
@@ -111,16 +121,15 @@ if biggest.size != 0:
     #Perspective Transform
     matrix = cv2.getPerspectiveTransform(pts_biggest_contour, pts_img) 
     img_warp = cv2.cvtColor(cv2.warpPerspective(img, matrix, (img_h, img_w)),cv2.COLOR_BGR2GRAY)
-else:
-	#raise Exception("Could not find Sudoku puzzle outline.")
-    print("Could not find Sudoku puzzle outline.")
 
-if find_sudoku:
-    steps_demo = ([img,image_threshold, img_contours, img_warp])
-else:
-    steps_demo = ([img,image_threshold, img_contours])
-    
+imgSolvedDigits = img_pipeline.copy()
+cells = crop_cell(img_warp)
+ 
+steps_demo = ([img,image_threshold, img_contours, img_warp])
+steps_demo2 = ([cells])
 img_pipeline = img_stack(steps_demo, 1)
+img_pipeline2 = img_stack(steps_demo2, 1)
 cv2.imshow('Images', img_pipeline)
+cv2.imshow("Cells",img_pipeline2)  
 cv2.waitKey(0)
 cv2.destroyAllWindows()

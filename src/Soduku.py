@@ -1,6 +1,10 @@
 import cv2
 import numpy as np
 
+sudoku_v_cells = 9
+sudoku_h_cells = 9
+
+
 # Preprocess image function:
 # Convert the image to grayscale
 # Add some blur for easier detection
@@ -31,7 +35,7 @@ def biggest_contour(contours):
         if area > 50:
             peri = cv2.arcLength(contour, True)
             approx = cv2.approxPolyDP(contour, 0.02 * peri, True)
-            if area > max_area & len(approx) == 4:
+            if area > max_area and len(approx) == 4:
                 max_area = area
                 biggest_contour = approx
     return biggest_contour,max_area
@@ -53,6 +57,16 @@ def reframe(points):
     print("new points: ")
     print(new_points)
     return new_points
+
+
+def split_cells(img):
+    rows = np.vsplit(img,sudoku_v_cells)
+    boxes = []
+    for r in rows:
+        cols = np.hsplit(r,sudoku_h_cells)
+        for box in cols:
+            boxes.append(box)
+            return boxes
 
 # Stack images
 # Use for demo only
@@ -87,7 +101,6 @@ def img_stack(img_array,scale):
 img_path = 'input/99.jpg'
 img_h = 550
 img_w = 550
-find_sudoku = False
 
 img = cv2.imread(img_path)
 img = cv2.resize(img, (img_w, img_h))
@@ -102,7 +115,6 @@ cv2.drawContours(img_contours, contours, -1, (155, 0, 155), 3)
 
 biggest, max_area = biggest_contour(contours) 
 if biggest.size != 0:
-    find_sudoku == True
     biggest = reframe(biggest)
     cv2.drawContours(img_biggest_contour, biggest, -1, (0, 255, 0), 15) 
     #prepare ponits before warp
@@ -114,12 +126,8 @@ if biggest.size != 0:
 else:
 	#raise Exception("Could not find Sudoku puzzle outline.")
     print("Could not find Sudoku puzzle outline.")
-
-if find_sudoku:
-    steps_demo = ([img,image_threshold, img_contours, img_warp])
-else:
-    steps_demo = ([img,image_threshold, img_contours])
     
+steps_demo = ([img,image_threshold, img_contours, img_warp])
 img_pipeline = img_stack(steps_demo, 1)
 cv2.imshow('Images', img_pipeline)
 cv2.waitKey(0)

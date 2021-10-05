@@ -70,12 +70,25 @@ def check_box(grid, x, y) -> bool:
 def solve(grid):
     """Takes a valid sudoku grid and returns it solved."""
     original_layout = [[True if grid[y][x] != 0 else False for x in range(9)] for y in range(9)]
-
+    
+    #with open("logs.txt", 'w') as f:
+    count = 0
     i = 0
     while i < 81:
-        print(i)
+        count += 1
+
         y = i // 9
         x = i % 9
+        
+#        if count > 9950:
+#            f.write("i=" + str(i) + " x=" + str(x) + " y=" + str(y) + " val=" + str(grid[y][x]) + " Original=" + str(original_layout[y][x]) +"\n")
+#            for row in grid:
+#                f.write(str(row) + "\n")
+#            f.write("\n")
+#
+#        if count > 10000:
+#            break
+#
 
         if original_layout[y][x]:
             i += 1
@@ -88,7 +101,8 @@ def solve(grid):
                 break
         else:
             grid[y][x] = 0
-            while not original_layout[i // 9][i % 9]:
+            i -= 1
+            while original_layout[i // 9][i % 9]:
                 i -= 1
 
     return grid
@@ -99,9 +113,19 @@ def read_grid(filename: str):
 
     Expects spaces between numbers in a row, no spaces between rows, and 0s represent unfilled values.
     Doesn't make any assumptions or checks on dimensions."""
-
     grid = []
     with open(filename) as f:
         for line in f:
             grid.append(list(map(int, line.split())))
     return grid
+
+def print_grid(grid):
+    """Takes a grid in 2D array format and prints it nicely for comparison purposes."""
+    print('\n'.join(map(lambda r: ' '.join(map(str, r)), grid)))
+
+s1 = read_grid("s1.txt")
+s2 = read_grid("s2.txt")
+s3 = read_grid("s3.txt")
+s4 = read_grid("s4.txt")
+very_easy = read_grid("very_easy.txt")
+hard = read_grid("hard.txt")

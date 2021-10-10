@@ -1,14 +1,6 @@
-from constraint import *
+import constraint as con
+from solver_utils import *
 
-problem = Problem()
-
-problem.addVariables(range(81), range(1, 10))
-
-for i in range(9):
-    problem.addConstraint(AllDifferentConstraint(), range(i*9, 9 + i*9))
-    problem.addConstraint(AllDifferentConstraint(), range(i, 9*8+i, 9))
-
-solution = problem.getSolution() # only 1 sol
 
 def convert_dict(d):
     """Takes a single solution dictionary and puts it into a 2D list format."""
@@ -16,3 +8,15 @@ def convert_dict(d):
     d_list = [d_list[i:i+9] for i in range(9)]
 
     return d_list
+
+
+problem = con.Problem()
+
+problem.addVariables(range(81), range(1, 10))
+
+for i in range(9):
+    problem.addConstraint(con.AllDifferentConstraint(), range(i*9, 9 + i*9))
+    problem.addConstraint(con.AllDifferentConstraint(), range(i, 9*9+i, 9))
+
+solution = convert_dict(problem.getSolution()) # only 1 sol
+

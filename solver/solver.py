@@ -1,7 +1,6 @@
 # developed in Python 3.9
 # define sudoku as a 9x9 2D list with 0s for unfilled in values, where each sublist represents a row, starting indexing from top left corner
 
-# nums = frozenset([1, 2, 3, 4, 5, 6, 7, 8, 9])
 
 def check_location(grid, x, y) -> bool:
     """Given the grid in its current state and the 0-indexed co-ordinates of the number just added, returns True if it's allowed to be there.
@@ -80,16 +79,6 @@ def solve(grid):
         y = i // 9
         x = i % 9
         
-#        if count > 9950:
-#            f.write("i=" + str(i) + " x=" + str(x) + " y=" + str(y) + " val=" + str(grid[y][x]) + " Original=" + str(original_layout[y][x]) +"\n")
-#            for row in grid:
-#                f.write(str(row) + "\n")
-#            f.write("\n")
-#
-#        if count > 10000:
-#            break
-#
-
         if original_layout[y][x]:
             i += 1
             continue
@@ -119,13 +108,7 @@ def read_grid(filename: str):
             grid.append(list(map(int, line.split())))
     return grid
 
+
 def print_grid(grid):
     """Takes a grid in 2D array format and prints it nicely for comparison purposes."""
     print('\n'.join(map(lambda r: ' '.join(map(str, r)), grid)))
-
-s1 = read_grid("s1.txt")
-s2 = read_grid("s2.txt")
-s3 = read_grid("s3.txt")
-s4 = read_grid("s4.txt")
-very_easy = read_grid("very_easy.txt")
-hard = read_grid("hard.txt")

@@ -19,4 +19,3 @@ for i in range(9):
     problem.addConstraint(con.AllDifferentConstraint(), range(i, 9*9+i, 9))
 
 solution = convert_dict(problem.getSolution()) # only 1 sol
-

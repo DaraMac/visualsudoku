@@ -32,3 +32,4 @@ Prototype Progress
 Library Requirements
 --------------------
 - python-constraint 1.4.0 (for the constraint solver)
+- cv2

@@ -79,7 +79,7 @@ def get_box(grid, x, y):
 
 
 def check_box(grid, x, y) -> bool:
-    """Determines which of the 9 boxes a location lies in and checks if that box is valid."""
+    """Checks if the sub-box a location lies in is valid."""
 
     box = get_box(grid, x, y)
     checked = [False]*9

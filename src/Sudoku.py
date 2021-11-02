@@ -3,7 +3,10 @@ import numpy as np
 import math
 from scipy import ndimage
 import os
+import brute_solver
+import SA
 import tensorflow as tf
+import time
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 from tensorflow.keras.models import load_model
 
@@ -41,7 +44,7 @@ def img_stack(img_array,scale):
         ver = hor
     return ver
 
-def displayNumbers(img,numbers,color = (255, 255, 255)):
+def display_numbers(img,numbers,color = (255, 255, 255)):
     secW = int(img.shape[1]/9)
     secH = int(img.shape[0]/9)
     for x in range (0,9):
@@ -149,6 +152,18 @@ def predect_digits(cells,model):
     return result
 
 
+def drawGrid(img):
+    secW = int(img.shape[1]/9)
+    secH = int(img.shape[0]/9)
+    for i in range (0,9):
+        pt1 = (0,secH*i)
+        pt2 = (img.shape[1],secH*i)
+        pt3 = (secW * i, 0)
+        pt4 = (secW*i,img.shape[0])
+        cv2.line(img, pt1, pt2, (255, 255, 255),2)
+        cv2.line(img, pt3, pt4, (255, 255, 255),2)
+    return img
+
 # This function is used for separating the digit from noise in each box of the boxes
 # The sudoku board will be cropped into 9x9 small square image in the split boxes function
 # each of those box is a cropped image
@@ -195,6 +210,15 @@ def shift(img, sx, sy):
     M = np.float32([[1, 0, sx], [0, 1, sy]])
     shifted = cv2.warpAffine(img, M, (cols, rows))
     return shifted
+
+def digit_enhancement(cell):
+    # Resizing that digit to (18, 18)
+    resized_digit = cv2.resize(cell, (18,18))
+    
+    # Padding the digit with 5 pixels of black color (zeros) in each side to finally produce the image of (28, 28)
+    padded_digit = np.pad(resized_digit, ((5,5),(5,5)), "constant", constant_values=0)
+    
+    return padded_digit
 
 
 # First we init an empty cells to store the sudoku board digits
@@ -270,7 +294,10 @@ def crop_cell2(main_board):
             crop_image = shifted
 
 
+            #crop_image = digit_enhancement(crop_image)
+
             crop_image = cv2.bitwise_not(crop_image)
+            
             cells.append(crop_image)
             
     return cells
@@ -278,7 +305,7 @@ def crop_cell2(main_board):
 
 
 
-img_path = 'input/3.jpg'
+img_path = 'input/13.jpg'
 model_path ='model/model.h5'
 img_h = 540
 img_w = 540
@@ -312,19 +339,59 @@ if biggest.size != 0:
     cells = crop_cell(main_board)
     cells = crop_cell2(main_board)
 
-    #cv2.imwrite('numbers/savedImage2.jpg', cells[1], [cv2.IMWRITE_JPEG_QUALITY, 100])
+    cv2.imwrite('numbers/savedImage2.jpg', cells[49], [cv2.IMWRITE_JPEG_QUALITY, 100])
 
+
+    solution_draw = img_pipeline.copy()
     digits = predect_digits(cells, model)
     print(digits)
+    digits= np.asanyarray(digits)
+    
+    img_detected_digits = img_pipeline.copy()
+    img_detected_digits = display_numbers(img_detected_digits, digits, color=(255, 255, 255))
+    
+    place_holder_digits = np.where(digits > 0, 0, 1)
+    print(place_holder_digits)
+    print(np.reshape(digits,[9, 9]))
+    solution=[]
+    find_solution = False
+    try:
+        start_time = time.time()
+        solution = brute_solver.solve(np.reshape(digits,[9, 9]))
+        print("--- %s seconds for BF---" % (time.time() - start_time))
 
-    imgDetectedDigits = img_pipeline.copy()
-    imgDetectedDigits = displayNumbers(imgDetectedDigits, digits, color=(255, 255, 255))
- 
-steps_demo = ([img, img_warp,main_board, imgDetectedDigits])
+        start_time = time.time()
+        solution = SA.solve_sudoku(np.reshape(digits,[9, 9]))
+        print("--- %s seconds for SA--- " % (time.time() - start_time))
+        print(solution)
+
+        find_solution = True
+    except:
+        pass
+     
+    if find_solution:
+        flat_array =[]
+        for sublist in solution:
+            for item in sublist:
+                flat_array.append(item)
+        solved_digits = flat_array * place_holder_digits
+        solution_draw = display_numbers(solution_draw,solved_digits, color=(0, 255, 255))
+    
+    # overlay
+    matrix = cv2.getPerspectiveTransform(pts_img, pts_biggest_contour)  
+    img_warp_color = img.copy()
+    img_warp_color = cv2.warpPerspective(solution_draw, matrix, (img_w, img_h))
+    inv_perspective = cv2.addWeighted(img_warp_color, 1, img, 0.5, 1)
+    img_detected_digits = drawGrid(img_detected_digits)
+    solution_draw = drawGrid(solution_draw)
+    
+    
+steps_demo = ([img,main_board, img_detected_digits,img_warp_color])
 steps_demo2 = ([cells])
 img_pipeline = img_stack(steps_demo, 1)
 img_pipeline2 = img_stack(steps_demo2, 1)
 cv2.imshow('Images', img_pipeline)
-cv2.imshow("Cells",img_pipeline2)  
+cv2.imshow("Cells",img_pipeline2) 
+cv2.imshow("Solution",inv_perspective)   
 cv2.waitKey(0)
 cv2.destroyAllWindows()

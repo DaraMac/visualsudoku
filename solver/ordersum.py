@@ -16,36 +16,38 @@ import heapq
 test_input = [[1, 2, 3], [0, 7, 8], [3], [2, 4]]
 dict_input = [{1:1, 2:2, 3:3}, {0:0, 7:7, 8:8}, {3:3}, {2:2, 4:4}
 
-# Make sure lists are sorted
-for l in test_input:
-	l.sort(reverse=True)
+def enum_grids(grid):
 
-# Figure out biggest sum
-current_sum = sum([l[0] for l in test_input])
+    # Make sure lists are sorted
+    for l in test_input:
+            l.sort(reverse=True)
 
-# Make starting item
-item = (-current_sum , test_input)
+    # Figure out biggest sum
+    current_sum = sum([l[0] for l in test_input])
 
-heap = []
-seen = set()
-heapq.heappush(heap, item)
-seen.add(str(item))
+    # Make starting item
+    item = (-current_sum , test_input)
 
-while len(heap) > 0:
-	item = heapq.heappop(heap)
-	seen.discard(str(item))
-	assert len(heap) == len(seen)
-	current_sum = -item[0]
-	lol = item[1]
+    heap = []
+    seen = set()
+    heapq.heappush(heap, item)
+    seen.add(str(item))
 
-	print("{} = sum({})".format(-item[0], [l[0] for l in lol]))
+    while len(heap) > 0:
+            item = heapq.heappop(heap)
+            seen.discard(str(item))
+            assert len(heap) == len(seen)
+            current_sum = -item[0]
+            lol = item[1]
 
-	for i in range(len(lol)):
-		if len(lol[i]) > 1:
-			newsum = current_sum - lol[i][0] + lol[i][1]
-			newlist = lol.copy()
-			newlist[i] = lol[i][1:]
-			item = (-newsum, newlist)
-			if not (str(item) in seen):
-				heapq.heappush(heap, item)
-				seen.add(str(item))
+            print("{} = sum({})".format(-item[0], [l[0] for l in lol]))
+
+            for i in range(len(lol)):
+                    if len(lol[i]) > 1:
+                            newsum = current_sum - lol[i][0] + lol[i][1]
+                            newlist = lol.copy()
+                            newlist[i] = lol[i][1:]
+                            item = (-newsum, newlist)
+                            if not (str(item) in seen):
+                                    heapq.heappush(heap, item)
+                                    seen.add(str(item))

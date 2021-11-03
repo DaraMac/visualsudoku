@@ -80,7 +80,6 @@ def get_box(grid, x, y):
 
 def check_box(grid, x, y) -> bool:
     """Checks if the sub-box a location lies in is valid."""
-
     box = get_box(grid, x, y)
     checked = [False]*9
     for n in box:
@@ -95,7 +94,6 @@ def check_box(grid, x, y) -> bool:
 
 def get_errors(grid):
     """Returns list of tuples of indices (x, y) that are invalid in a grid."""
-
     errors = []
     for x in range(9):
         for y in range(9):

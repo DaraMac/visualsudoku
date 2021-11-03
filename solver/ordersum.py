@@ -14,19 +14,19 @@
 import heapq
 
 test_input = [[1, 2, 3], [0, 7, 8], [3], [2, 4]]
-dict_input = [{1:1, 2:2, 3:3}, {0:0, 7:7, 8:8}, {3:3}, {2:2, 4:4}
+dict_input = [{1:1, 2:2, 3:3}, {0:0, 7:7, 8:8}, {3:3}, {2:2, 4:4}]
 
-def enum_grids(grid):
+def enum_grids(probabilities):
 
     # Make sure lists are sorted
-    for l in test_input:
+    for l in probabilities:
             l.sort(reverse=True)
 
     # Figure out biggest sum
-    current_sum = sum([l[0] for l in test_input])
+    current_sum = sum([l[0] for l in probabilities])
 
     # Make starting item
-    item = (-current_sum , test_input)
+    item = (-current_sum , probabilities)
 
     heap = []
     seen = set()
@@ -45,9 +45,12 @@ def enum_grids(grid):
             for i in range(len(lol)):
                     if len(lol[i]) > 1:
                             newsum = current_sum - lol[i][0] + lol[i][1]
-                            newlist = lol.copy()
+                            newlist = lol.copy() # This doesn't work like you'd think
                             newlist[i] = lol[i][1:]
                             item = (-newsum, newlist)
                             if not (str(item) in seen):
                                     heapq.heappush(heap, item)
                                     seen.add(str(item))
+                                    print(heap)
+
+enum_grids(test_input)

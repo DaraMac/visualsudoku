@@ -120,7 +120,7 @@ def compute_initial_sigma (sudoku, fixed_sudoku, blocks):
     return (statistics.pstdev(list_of_differences))
 
 
-def solve_sudoku (sudoku):
+def solve(sudoku):
     # f = open("demofile2.txt", "a")
     solutionFound = 0
     while (solutionFound == 0):

@@ -1,5 +1,4 @@
 import cv2
-import imutils
 import numpy as np
 import math
 from scipy import ndimage
@@ -142,7 +141,8 @@ def predect_digits(cells,model):
     for cell in cells:
         new_cells = cell_preprocessing2(cell)
         predictions = model.predict(new_cells)
-        index = model.predict_classes(new_cells)
+        index = model.predict_classes(new_cells) # this is deprecated in tensorflow
+        # index = np.argmax(model.predict(new_cells), axis=-1) # this also gives invalid value in double_scalars
         probability_value = np.amax(predictions, axis = -1)
         #print(index, probability_value)
         if probability_value > 0.8:

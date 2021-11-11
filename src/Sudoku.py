@@ -197,7 +197,7 @@ def prepossessing_for_model(main_board):
 
 # Calculate how to centralize the image using its center of mass
 def get_best_shift(img):
-    cy, cx = ndimage.measurements.center_of_mass(img)
+    cy, cx = ndimage.measurements.center_of_mass(img) # TODO i think this is where the error is https://stackoverflow.com/questions/22044224/scipy-runtime-warning
     rows, cols = img.shape
     shiftx = np.round(cols/2.0-cx).astype(int)
     shifty = np.round(rows/2.0-cy).astype(int)

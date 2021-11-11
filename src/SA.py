@@ -120,8 +120,8 @@ def compute_initial_sigma (sudoku, fixed_sudoku, blocks):
     return (statistics.pstdev(list_of_differences))
 
 
-def solve_sudoku (sudoku):
-    f = open("demofile2.txt", "a")
+def solve(sudoku):
+    # f = open("demofile2.txt", "a")
     solutionFound = 0
     while (solutionFound == 0):
         decreaseFactor = 0.98
@@ -144,7 +144,7 @@ def solve_sudoku (sudoku):
                 scoreDiff = newState[1]
                 score += scoreDiff
                 print(score)
-                f.write(str(score) + '\n')
+                # f.write(str(score) + '\n')
                 if score <= 0:
                     solutionFound = 1
                     break
@@ -161,11 +161,10 @@ def solve_sudoku (sudoku):
                 sigma += 2
             if(number_0f_errors(tmpSudoku)==0):
                 break
-    f.close()
+    # f.close()
     return(tmpSudoku)
 
 
-solution = solve_sudoku(sudoku)
-print(number_0f_errors(solution))
-print(solution)
-
+# solution = solve_sudoku(sudoku)
+# print(number_0f_errors(solution))
+# print(solution)

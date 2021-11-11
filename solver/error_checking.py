@@ -1,3 +1,5 @@
+import solver_utils as util 
+
 # Input to this as a function should be a list of dicts
 # where the keys in each dict are numbers 0-9 inclusive (0 meaning a blank cell)
 # and the value for each key is the log of the probability the digit recogniser gives for that
@@ -15,6 +17,26 @@ import heapq
 
 test_input = [[1, 2, 3], [0, 7, 8], [3], [2, 4]]
 dict_input = [{1:1, 2:2, 3:3}, {0:0, 7:7, 8:8}, {3:3}, {2:2, 4:4}]
+
+def get_errors(grid):
+    """Returns list of tuples of indices (x, y) that are invalid in a grid."""
+    errors = []
+    for x in range(9):
+        for y in range(9):
+            n = grid[y][x]
+
+            if n == 0:
+                continue
+
+            if grid[y].count(n) > 1:
+                errors.append((x, y))
+            elif [grid[j][x] for j in range(9)].count(n) > 1:
+                errors.append((x, y))
+            elif get_box(grid, x, y).count(n) > 1:
+                errors.append((x, y))
+
+    return errors
+
 
 def enum_grids(probabilities):
 
@@ -53,4 +75,3 @@ def enum_grids(probabilities):
                                     seen.add(str(item))
                                     print(heap)
 
-enum_grids(test_input)

@@ -90,27 +90,3 @@ def check_box(grid, x, y) -> bool:
         else:
             return False
     return True
-
-
-def get_errors(grid):
-    """Returns list of tuples of indices (x, y) that are invalid in a grid."""
-    errors = []
-    for x in range(9):
-        for y in range(9):
-            n = grid[y][x]
-
-            if n == 0:
-                continue
-
-            if grid[y].count(n) > 1:
-                errors.append((x, y))
-            elif [grid[j][x] for j in range(9)].count(n) > 1:
-                errors.append((x, y))
-            elif get_box(grid, x, y).count(n) > 1:
-                errors.append((x, y))
-
-    return errors
-
-
-s1 = read_grid("s1.txt")
-s1[7][8] = 5

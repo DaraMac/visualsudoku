@@ -17,6 +17,7 @@ def print_grid(grid):
     print('\n'.join(map(lambda r: ' '.join(map(str, r)), grid)))
 
 
+# TODO make more efficient maybe?
 def check_valid(grid) -> bool:
     """Checks whether a given 9x9 2D list is a valid sudoku.
 

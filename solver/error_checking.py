@@ -38,8 +38,8 @@ def get_errors(grid):
     return errors
 
 
+# TODO check this will work as all the logs will be negative values because probabilities are less than 1!
 def enum_grids(probabilities):
-
     # Make sure lists are sorted
     for l in probabilities:
             l.sort(reverse=True)
@@ -63,6 +63,7 @@ def enum_grids(probabilities):
             lol = item[1]
 
             print("{} = sum({})".format(-item[0], [l[0] for l in lol]))
+            yield [l[0] for l in lol] # new
 
             for i in range(len(lol)):
                     if len(lol[i]) > 1:
@@ -73,5 +74,59 @@ def enum_grids(probabilities):
                             if not (str(item) in seen):
                                     heapq.heappush(heap, item)
                                     seen.add(str(item))
-                                    print(heap)
+                                    # print("heap =", heap)
 
+
+# TODO check this will work as all the logs will be negative values because probabilities are less than 1!
+def enum_errors(error_log_probs):
+    """Like enum_grids but just for errors and in a slightly different format.
+
+    error_log_probs is same format as for get_probable_grid."""
+
+    # error_log_probs = [[(1, -0.69, 2, -.022, ..)], [..], ...]
+
+    # Make sure lists are sorted
+    for l in error_log_probs:
+        l.sort(key=lambda t: t[1], reverse=True)
+
+    # Figure out biggest sum
+    current_sum = sum([l[0][1] for l in error_log_probs])
+
+    # Make starting item
+    item = (-current_sum , error_log_probs)
+
+    heap = []
+    seen = set()
+    heapq.heappush(heap, item)
+    seen.add(str(item))
+
+    while len(heap) > 0:
+            item = heapq.heappop(heap)
+            seen.discard(str(item))
+            assert len(heap) == len(seen)
+            current_sum = -item[0]
+            ls = item[1]
+
+            # print("{} = sum({})".format(-item[0], [l[0] for l in ls]))
+            yield [l[0] for l in ls]
+
+            for i in range(len(ls)):
+                    if len(ls[i]) > 1:
+                            newsum = current_sum - ls[i][0][1] + ls[i][1][1]
+                            newlist = ls.copy() # TODO this doesn't work like you'd think
+                            newlist[i] = ls[i][1:]
+                            item = (-newsum, newlist)
+                            if not (str(item) in seen):
+                                    heapq.heappush(heap, item)
+                                    seen.add(str(item))
+                                    # print("heap =", heap)
+
+
+# TODO maybe dont use log probs?
+def get_probable_grid(grid, errors, error_log_probs):
+    """Given the list of errors in a grid, returns the first valid grid that has the highest probability based on the digit recogniser probabilities.
+
+    Where errors is the tuple of indices from get_errors, and error_log_probs is a list of lists of tuples containing the logs of the probabilities for the digits 1-9 according to the character recognition.
+    The first element in the tuple will be the number and the second element the log probability.
+    The lists will be ordered so that index [i] in errors is the sudoku square with probabilities [i] in error_log_probs."""
+    # error_log_probs = [[(1, -0.69, 2, -.022, ..)], [..], ...]

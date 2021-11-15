@@ -2,6 +2,7 @@ import timeit
 import csv
 from statistics import mean
 import matplotlib.pyplot as plt
+from matplotlib import interactive # to make plots show while testing
 import numpy as np
 
 import brute_solver
@@ -32,3 +33,20 @@ for i in range(100):
 print(f"Brute:\nMean {mean(times['brute'])}\nMax {max(times['brute'])}\nMin {min(times['brute'])}\n")
 print(f"Constraint:\nMean {mean(times['constraint'])}\nMax {max(times['constraint'])}\nMin {min(times['constraint'])}\n")
 print(f"Simulated Annealing:\nMean {mean(times['anneal'])}\nMax {max(times['anneal'])}\nMin {min(times['anneal'])}\n")
+
+x = np.linspace(0, 2, 100)
+
+brute = times["brute"]
+constraint = times["constraint"]
+anneal = times["anneal"]
+
+interactive(True) # to make plots show while testing
+# Note that even in the OO-style, we use `.pyplot.figure` to create the figure.
+fig, ax = plt.subplots()  # Create a figure and an axes.
+# ax.plot(x, x, label='linear')  # Plot some data on the axes.
+# ax.plot(x, x**2, label='quadratic')  # Plot more data on the axes...
+# ax.plot(x, x**3, label='cubic')  # ... and some more.
+# ax.set_xlabel('x label')  # Add an x-label to the axes.
+# ax.set_ylabel('y label')  # Add a y-label to the axes.
+# ax.set_title("Simple Plot")  # Add a title to the axes.
+# ax.legend()  # Add a legend.

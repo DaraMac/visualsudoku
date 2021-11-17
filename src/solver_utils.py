@@ -1,3 +1,5 @@
+# All these functions assume grid is a 2D list with dim 9x9
+
 def read_grid(filename: str):
     """Reads in a single sudoku puzzle in txt format and returns it as a 2D list.
 
@@ -15,6 +17,7 @@ def print_grid(grid):
     print('\n'.join(map(lambda r: ' '.join(map(str, r)), grid)))
 
 
+# TODO make more efficient maybe?
 def check_valid(grid) -> bool:
     """Checks whether a given 9x9 2D list is a valid sudoku.
 
@@ -23,7 +26,7 @@ def check_valid(grid) -> bool:
 
 
 def check_location(grid, x, y) -> bool:
-    """Given the grid in its current state and the 0-indexed co-ordinates of the number just added, returns True if it's allowed to be there.
+    """Given a grid and the 0-indexed co-ordinates of a number, returns True if it's allowed to be there.
 
     This function assumes the rest of the grid is valid and that each sublist represents a row."""
     if check_row(grid, y) and check_col(grid, x) and check_box(grid, x, y):
@@ -57,9 +60,8 @@ def check_col(grid, x) -> bool:
             return False
     return True
 
-
-def check_box(grid, x, y) -> bool:
-    """Determines which of the 9 boxes a location lies in and checks if that box is valid."""
+def get_box(grid, x, y):
+    """Determines which of the 9 sub-boxes a locations lies in and returns that box as a list."""
     if x < 3:
         x_box = 0
     elif x < 6:
@@ -74,7 +76,12 @@ def check_box(grid, x, y) -> bool:
     else:
         y_box = 2
 
-    box = [grid[3*y_box + j][3*x_box + i] for i in range(3) for j in range(3)]
+    return [grid[3*y_box + j][3*x_box + i] for i in range(3) for j in range(3)]
+
+
+def check_box(grid, x, y) -> bool:
+    """Checks if the sub-box a location lies in is valid."""
+    box = get_box(grid, x, y)
     checked = [False]*9
     for n in box:
         if n == 0:

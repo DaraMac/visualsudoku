@@ -143,7 +143,7 @@ def predect_digits(cells,model):
         predictions = model.predict(new_cells)
         index = model.predict_classes(new_cells) # this is deprecated in tensorflow
         # index = np.argmax(model.predict(new_cells), axis=-1) # this also gives invalid value in double_scalars
-        probability_value = np.amax(predictions, axis = -1)
+        probability_value = np.amax(predictions, axis = -1) # TODO print out these predictions I need this for my error function
         #print(index, probability_value)
         if probability_value > 0.8:
             result.append(index[0])

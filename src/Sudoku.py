@@ -120,8 +120,8 @@ def reframe(points):
     diff = np.diff(points, axis=1)
     new_points[1] = points[np.argmin(diff)]
     new_points[2] = points[np.argmax(diff)]
-    print("original points: \n", points)
-    print("new points: \n", new_points)
+    # print("original points: \n", points)
+    # print("new points: \n", new_points)
     return new_points
 
 # Split sudoku into sudoku_v_cells * sudoku_h_cells cells
@@ -132,24 +132,26 @@ def crop_cell(img):
         cols= np.hsplit(r,sudoku_h_cells)
         for cell in cols:
             cells.append(cell)
-    print("number of cells: ", len(cells))
+    # print("number of cells: ", len(cells))
     return cells
 
 # Get prediction and save result
 def predect_digits(cells,model):
     result = []
+    probs = []
     for cell in cells:
         new_cells = cell_preprocessing2(cell)
         predictions = model.predict(new_cells)
         index = model.predict_classes(new_cells) # this is deprecated in tensorflow
         # index = np.argmax(model.predict(new_cells), axis=-1) # this also gives invalid value in double_scalars
         probability_value = np.amax(predictions, axis = -1) # TODO print out these predictions I need this for my error function
+        probs.append(predictions)
         #print(index, probability_value)
         if probability_value > 0.8:
             result.append(index[0])
         else:
             result.append(0)
-    return result
+    return result, probs
 
 
 def drawGrid(img):
@@ -305,7 +307,12 @@ def crop_cell2(main_board):
 
 
 
-img_path = 'input/13.jpg'
+# ones with lots (possibly too many) errors: 3, 5, 6, 8
+# 7.jpg doesnt produce results, says: 'main_board' is not defined
+# going to test on 8 first as the only error seems to be having additional 1s put in
+# and there are not too many of them so it's a promising candidate for this type of
+# error checking
+img_path = 'input/8.jpg'
 model_path ='model/model.h5'
 img_h = 540
 img_w = 540
@@ -343,27 +350,28 @@ if biggest.size != 0:
 
 
     solution_draw = img_pipeline.copy()
-    digits = predect_digits(cells, model)
-    print(digits)
+    digits, probs = predect_digits(cells, model) # correctly predicts first digit as 3
+    # print(digits)
     digits= np.asanyarray(digits)
     
     img_detected_digits = img_pipeline.copy()
     img_detected_digits = display_numbers(img_detected_digits, digits, color=(255, 255, 255))
     
     place_holder_digits = np.where(digits > 0, 0, 1)
-    print(place_holder_digits)
-    print(np.reshape(digits,[9, 9]))
+    # print(place_holder_digits)
+    # print(np.reshape(digits,[9, 9]))
     solution=[]
     find_solution = False
     try:
         start_time = time.time()
         solution = brute_solver.solve(np.reshape(digits,[9, 9]))
         print("--- %s seconds for BF---" % (time.time() - start_time))
-
-        start_time = time.time()
-        solution = SA.solve_sudoku(np.reshape(digits,[9, 9]))
-        print("--- %s seconds for SA--- " % (time.time() - start_time))
         print(solution)
+
+        #start_time = time.time()
+        #solution = SA.solve_sudoku(np.reshape(digits,[9, 9]))
+        #print("--- %s seconds for SA--- " % (time.time() - start_time))
+        #print(solution)
 
         find_solution = True
     except:

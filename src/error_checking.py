@@ -32,10 +32,16 @@ def get_errors(grid):
                 errors.append((x, y))
             elif [grid[j][x] for j in range(9)].count(n) > 1:
                 errors.append((x, y))
-            elif get_box(grid, x, y).count(n) > 1:
+            elif util.get_box(grid, x, y).count(n) > 1:
                 errors.append((x, y))
 
     return errors
+
+def remove_errors(grid, errors):
+    """Takes a grid and a (non-empty) list of (x, y) co-ords of duplication errors in that grid and simply zeros them."""
+    for x, y in errors:
+        grid[y][x] = 0
+    return grid
 
 
 # TODO check this will work as all the logs will be negative values because probabilities are less than 1!

@@ -37,10 +37,10 @@ for i in range(100):
     times["constraint"].append(timeit.timeit(f"constraint_solver.solve(tests[{i}])", globals=globals(), number=1))
     times["anneal"].append(timeit.timeit(f"SA.solve(p)", setup=f"p = np.array(tests[{i}])", globals=globals(), number=1))
 
-# print(f"Brute:\nMean {mean(times['brute'])}\nMax {max(times['brute'])}\nMin {min(times['brute'])}\n")
-# print(f"Constraint:\nMean {mean(times['constraint'])}\nMax {max(times['constraint'])}\nMin {min(times['constraint'])}\n")
-# print(f"Simulated Annealing:\nMean {mean(times['anneal'])}\nMax {max(times['anneal'])}\nMin {min(times['anneal'])}\n")
-# 
+print(f"Brute:\nMean {mean(times['brute'])}\nMax {max(times['brute'])}\nMin {min(times['brute'])}\n")
+print(f"Constraint:\nMean {mean(times['constraint'])}\nMax {max(times['constraint'])}\nMin {min(times['constraint'])}\n")
+print(f"Simulated Annealing:\nMean {mean(times['anneal'])}\nMax {max(times['anneal'])}\nMin {min(times['anneal'])}\n")
+
 brute = times["brute"]
 constraint = times["constraint"]
 anneal = times["anneal"]

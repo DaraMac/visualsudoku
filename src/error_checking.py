@@ -16,7 +16,7 @@ import solver_utils as util
 import heapq
 
 test_input = [[1, 2, 3], [0, 7, 8], [3], [2, 4]]
-dict_input = [{1:1, 2:2, 3:3}, {0:0, 7:7, 8:8}, {3:3}, {2:2, 4:4}]
+# dict_input = [{1:1, 2:2, 3:3}, {0:0, 7:7, 8:8}, {3:3}, {2:2, 4:4}]
 
 def get_errors(grid):
     """Returns list of tuples of indices (x, y) that are invalid in a grid."""
@@ -36,6 +36,7 @@ def get_errors(grid):
                 errors.append((x, y))
 
     return errors
+
 
 def remove_errors(grid, errors):
     """Takes a grid and a (non-empty) list of (x, y) co-ords of duplication errors in that grid and simply zeros them."""
@@ -82,8 +83,9 @@ def enum_grids(probabilities):
                                     seen.add(str(item))
                                     # print("heap =", heap)
 
-
+# 7, 0.05751910805
 # TODO check this will work as all the logs will be negative values because probabilities are less than 1!
+# really it's useless unless we include spaces
 def enum_errors(error_log_probs):
     """Like enum_grids but just for errors and in a slightly different format.
 
@@ -129,10 +131,32 @@ def enum_errors(error_log_probs):
 
 
 # TODO maybe dont use log probs?
-def get_probable_grid(grid, errors, error_log_probs):
+# Make work with blanks!!!!
+def get_probable_grid(grid, errors, probs):
     """Given the list of errors in a grid, returns the first valid grid that has the highest probability based on the digit recogniser probabilities.
 
-    Where errors is the tuple of indices from get_errors, and error_log_probs is a list of lists of tuples containing the logs of the probabilities for the digits 1-9 according to the character recognition.
-    The first element in the tuple will be the number and the second element the log probability.
+    Where errors is the tuple of indices from get_errors, and probs is a list of lists of tuples containing the probabilities for the digits 1-9 according to the character recognition.
+    The first element in the tuple will be the number and the second element the probability.
     The lists will be ordered so that index [i] in errors is the sudoku square with probabilities [i] in error_log_probs."""
     # error_log_probs = [[(1, -0.69, 2, -.022, ..)], [..], ...]
+
+    # ndarry conversion to be consistent down the line
+    # [1:] as we don't want the probability it is 0 as that's impossible
+    probs = [list(enumerate(p.tolist()))[1:] for p in probs]
+    eps = [error_probs[y*9 + x] for x, y in errors]
+
+    gen = enum_errors(eps)
+    # the most likely one will just be the configuration it's already in
+    # so we skip that by calling next()
+    gen.__next__()
+
+    # config = gen.__next__()
+    for ps in gen:
+        for e, p in zip(errors, ps):
+            x, y = e[0], e[1]
+            grid[9*y + x] = p[0]
+
+        # TODO add prob threshold cutoff point so it doesnt get ridiculous
+        if util.check_valid(grid):
+            yield grid
+        # TODO maybe make a copy of the grid so as to not lose the original here?

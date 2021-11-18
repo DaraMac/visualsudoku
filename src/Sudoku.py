@@ -16,6 +16,9 @@ sudoku_v_cells = 9
 sudoku_h_cells = 9
 
 
+# debug only
+flag = False
+
 # Stack images
 # Use for demo only
 def img_stack(img_array,scale):
@@ -378,8 +381,13 @@ if biggest.size != 0:
 
         # TODO probabilistic error checking!
         if len(errors) != 0:
-            grid = error.remove_errors(grid, errors)
+            # remove redundant layer in probs
+            probs = [probs[i][0] for i in range(81)]
+            # TODO could maybe optimise by not passing full array of probs here
+            # but if I do that need to rework so don't mess up indexing by enumerate
+            grid = error.get_probable_grid(grid, errors, probs)
 
+            # not technically necessary rn as this cant produce blanks yet
             place_holder_digits = np.where(np.array(grid).reshape([81]) > 0, 0, 1)
 
 
@@ -415,12 +423,14 @@ if biggest.size != 0:
     solution_draw = drawGrid(solution_draw)
     
     
-steps_demo = ([img,main_board, img_detected_digits,img_warp_color])
-steps_demo2 = ([cells])
-img_pipeline = img_stack(steps_demo, 1)
-img_pipeline2 = img_stack(steps_demo2, 1)
-cv2.imshow('Images', img_pipeline)
-cv2.imshow("Cells",img_pipeline2) 
-cv2.imshow("Solution",inv_perspective)   
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+flag = True
+if flag:
+    steps_demo = ([img,main_board, img_detected_digits,img_warp_color])
+    steps_demo2 = ([cells])
+    img_pipeline = img_stack(steps_demo, 1)
+    img_pipeline2 = img_stack(steps_demo2, 1)
+    cv2.imshow('Images', img_pipeline)
+    cv2.imshow("Cells",img_pipeline2) 
+    cv2.imshow("Solution",inv_perspective)   
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()

@@ -317,7 +317,7 @@ def crop_cell2(main_board):
 # and there are not too many of them so it's a promising candidate for this type of
 # error checking
 img_path = 'input/8.jpg'
-model_path ='model/model.h5'
+model_path ='model/model13.h5'
 img_h = 540
 img_w = 540
 

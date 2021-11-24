@@ -60,23 +60,29 @@ anneal = times["anneal"]
 # ax.set_title("Simple Plot")  # Add a title to the axes.
 # ax.legend()  # Add a legend.
 
-fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2)
+# fig, ((ax11, ax12), (ax13, ax14)) = plt.subplots(2, 2)
+# 
+# fig.suptitle("Speed comparison of Sudoku solving algorithms")
+# 
+# ax11.hist(brute)
+# ax11.set_title("Brute Force")
+# 
+# ax12.hist(constraint)
+# ax12.set_title("Constraint Solver")
+# 
+# ax13.hist(anneal)
+# ax13.set_title("Simulated Annealing")
+# 
+# fig2, ax2 = plt.subplots()
+# ax2.hist([brute, constraint, anneal],
+#         bins=30,
+#         label=["brute", "constraint", "simulated annealing"])
+# ax2.set_xlabel("Time to solve (seconds)")
+# ax2.set_ylabel("No. of Sudoku")
+# ax2.legend()
 
-fig.suptitle("Speed comparison of Sudoku solving algorithms")
+fig3, ax3 = plt.subplots()
+ax3.scatter(anneal, constraint)
 
-ax1.hist(brute)
-ax1.set_title("Brute Force")
-
-ax2.hist(constraint)
-ax2.set_title("Constraint Solver")
-
-ax3.hist(anneal)
-ax3.set_title("Simulated Annealing")
-
-fig2, ax = plt.subplots()
-ax.hist([brute, constraint, anneal],
-        bins=30,
-        label=["brute", "constraint", "simulated annealing"])
-ax.legend()
 
 plt.show()

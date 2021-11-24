@@ -4,6 +4,8 @@ from statistics import mean
 import matplotlib.pyplot as plt
 from matplotlib import interactive # to make plots show while testing
 import numpy as np
+import pandas as pd
+import seaborn as sns
 
 import brute_solver
 import solver_utils as util
@@ -81,8 +83,12 @@ anneal = times["anneal"]
 # ax2.set_ylabel("No. of Sudoku")
 # ax2.legend()
 
-fig3, ax3 = plt.subplots()
-ax3.scatter(anneal, constraint)
+# fig3, ax3 = plt.subplots()
+# ax3.scatter(anneal, constraint)
 
+sns.set_theme(style="ticks")
+
+df = pd.DataFrame.from_dict(times)
+sns.pairplot(df)
 
 plt.show()

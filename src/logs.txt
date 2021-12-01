@@ -1,0 +1,12 @@
+Puzzle, Default Outcome
+0,      Perfect
+1,      Perfect
+2,      Solution but missing digits so incorrect
+3,      Perfect
+4,      Fails to detect grid
+5,      Misses a 9 and adds two 1s so fails to solve (test)
+6,      Perfect (for the one sudoku it detects)
+7,      error: 'main_board' is not defined
+8,      Misses some digits but solves correctly anyway
+9,      Misses quite a few digits so SA and brute dont solve
+10,     Misses some digits, replaces some 7s with 1s, no sol (test)

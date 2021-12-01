@@ -316,8 +316,8 @@ def crop_cell2(main_board):
 # going to test on 8 first as the only error seems to be having additional 1s put in
 # and there are not too many of them so it's a promising candidate for this type of
 # error checking
-img_path = 'input/8.jpg'
-model_path ='model/model13.h5'
+img_path = 'input/10.jpg'
+model_path ='model/model13.h5' # TODO change to model 15!
 img_h = 540
 img_w = 540
 
@@ -385,22 +385,24 @@ if biggest.size != 0:
             probs = [probs[i][0] for i in range(81)]
             # TODO could maybe optimise by not passing full array of probs here
             # but if I do that need to rework so don't mess up indexing by enumerate
-            grid = error.get_probable_grid(grid, errors, probs)
+            # uncomment below
+            # grid = error.get_probable_grid(grid, errors, probs)
 
             # not technically necessary rn as this cant produce blanks yet
-            place_holder_digits = np.where(np.array(grid).reshape([81]) > 0, 0, 1)
+            # uncomment below
+            # place_holder_digits = np.where(np.array(grid).reshape([81]) > 0, 0, 1)
 
 
         start_time = time.time()
         # solution = brute_solver.solve(np.reshape(digits,[9, 9]))
-        solution = brute_solver.solve(grid)
-        print("--- %s seconds for BF---" % (time.time() - start_time))
-        print(solution)
+        # solution = brute_solver.solve(grid)
+        # print("--- %s seconds for BF---" % (time.time() - start_time))
+        # print(solution)
 
         #start_time = time.time()
-        #solution = SA.solve_sudoku(np.reshape(digits,[9, 9]))
+        solution = SA.solve_sudoku(np.reshape(digits,[9, 9]))
         #print("--- %s seconds for SA--- " % (time.time() - start_time))
-        #print(solution)
+        print(solution)
 
         find_solution = True
     except:

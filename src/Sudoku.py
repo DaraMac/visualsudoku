@@ -370,7 +370,7 @@ if biggest.size != 0:
         # works perfectly for sudoku 8
         if len(errors) != 0:
             grid = error.remove_errors(grid, errors)
-        #   need this line so program knows where to draw solution now grid has changed
+           # need this line so program knows where to draw solution now grid has changed
             place_holder_digits = np.where(np.array(grid).reshape([81]) > 0, 0, 1)
 
         # TODO probabilistic error checking!

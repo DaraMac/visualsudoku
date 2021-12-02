@@ -135,7 +135,7 @@ def enum_errors(error_log_probs):
 def get_probable_grid(grid, errors, probs):
     """Given the list of errors in a grid, returns the first valid grid that has the highest probability based on the digit recogniser probabilities.
 
-    Where errors is the tuple of indices from get_errors, and probs is a list of lists of tuples containing the probabilities for the digits 1-9 according to the character recognition.
+    Where errors is the tuple of indices from get_errors, and probs is a list of lists of probabilities for the digits 1-9 according to the character recognition.
     The first element in the tuple will be the number and the second element the probability.
     The lists will be ordered so that index [i] in errors is the sudoku square with probabilities [i] in error_log_probs."""
     # error_log_probs = [[(1, -0.69, 2, -.022, ..)], [..], ...]
@@ -143,7 +143,7 @@ def get_probable_grid(grid, errors, probs):
     # ndarry conversion to be consistent down the line
     # [1:] as we don't want the probability it is 0 as that's impossible
     probs = [list(enumerate(p.tolist()))[1:] for p in probs]
-    eps = [error_probs[y*9 + x] for x, y in errors]
+    eps = [probs[y*9 + x] for x, y in errors]
 
     gen = enum_errors(eps)
     # the most likely one will just be the configuration it's already in

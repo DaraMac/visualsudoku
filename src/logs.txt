@@ -1,12 +1,35 @@
-Puzzle, Default Outcome
+Puzzle, Default Outcome,                                                 Error Removal
 0,      Perfect
 1,      Perfect
-2,      Solution but missing digits so incorrect
 3,      Perfect
-4,      Fails to detect grid
-5,      Misses a 9 and adds two 1s so fails to solve (test)
 6,      Perfect (for the one sudoku it detects)
+17,     Solves perfectly
+18,     Solves perfectly
+19,     Solves perfectly
+
+8,      Misses some digits (2s) but solves correctly anyway
+13,     Two blanks but solves
+14,     One blank but solves
+15,     One blank but solves
+
+
+2,      Solution but missing digits so incorrect
+
+5,      Misses a couple of digits and adds two 1s so fails to solve might be too few to solve,  makes it solveable but wrong as some digits didnt show and some were lost (test)
+9,      Misses quite a few digits and had error so didnt solve, (test) makes it solvable but very slow with brute also wrong as some digits were missing
+10,     Misses some digits and replaces some 7s with 1s so no sol (test), solvable but mutiple digits swapped so wrong, 
+
+12,     Lots of blank spaces filled with 1s unsolvable, (test) technically solves but so many missing not including the false 1s that theres lots of wrong overlaps
+16,     Barely picks up any digits and has errors probably never solvable but can use < 17 checking to alert system, (test) so many overlaps basically useless
+
+
+20,     Puzzle is already complete in image but most digits not recognised so maybe not enough to verify solution also some dupes, (test) way too ambiguous loads of wrong coverings completely useless
+
+
 7,      error: 'main_board' is not defined
-8,      Misses some digits but solves correctly anyway
-9,      Misses quite a few digits so SA and brute dont solve
-10,     Misses some digits, replaces some 7s with 1s, no sol (test)
+
+4,      Fails to detect grid
+11,     Doesnt find grid
+
+98,     Completely unrecogniseable as grid not located properly
+99,     Completely unrecogniseable as grid not located properly

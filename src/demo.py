@@ -6,19 +6,21 @@ from PIL import ImageGrab, Image
 import numpy as np
 import cv2
 
-model_path ='model/model11.h5'
+model_path ='model/model11.1.h5'
 model = load_model(model_path)
+image_size = 28
 
 def predict_digit(img):
     #resize image to 28x28 pixels
 
-    img = img.resize((28,28))
+    img = img.resize((image_size,image_size))
     #convert rgb to grayscale
     img = img.convert('L')
     img = np.array(img)
     img = cv2.bitwise_not(img)
+    img = ~img
     #reshaping to support our model input and normalizing
-    img = img.reshape(1,28,28,1)
+    img = img.reshape(1,image_size,image_size,1)
     img = img/255.0
     #predicting the class
     res = model.predict([img])[0]

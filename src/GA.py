@@ -10,7 +10,6 @@ Nd = 9
 
 # A set of candidate solutions to the Sudoku puzzle(chromosomes in the population).
 class Population(object):
-    """  """
 
     def __init__(self):
         self.candidates = []

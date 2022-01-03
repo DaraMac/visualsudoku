@@ -1,0 +1,269 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/Users/daramac/College/visualsudoku/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	//
+App	src/demo.py	/^class App(tk.Tk):$/;"	c
+Library Requirements	README.md	/^Library Requirements$/;"	s	chapter:Visual Sudoku Solver
+Prototype Progress	README.md	/^Prototype Progress$/;"	s	chapter:Visual Sudoku Solver
+Supervisors	README.md	/^Supervisors$/;"	s	chapter:Visual Sudoku Solver
+Team	README.md	/^Team$/;"	s	chapter:Visual Sudoku Solver
+Visual Sudoku Solver	README.md	/^Visual Sudoku Solver$/;"	c
+X_test	src/OCR_CNN_Trainning.py	/^X_test = X_test.reshape(X_test.shape[0],X_test.shape[1],X_test.shape[2],1)$/;"	v
+X_test	src/OCR_CNN_Trainning.py	/^X_test= np.array(list(map(preProcessing,X_test)))$/;"	v
+X_test	src/OCR_CNN_Trainning.py	/^X_train,X_test,y_train,y_test = train_test_split(images,classNo,test_size=testRatio)$/;"	v
+X_train	src/OCR_CNN_Trainning.py	/^X_train = X_train.reshape(X_train.shape[0],X_train.shape[1],X_train.shape[2],1)$/;"	v
+X_train	src/OCR_CNN_Trainning.py	/^X_train,X_test,y_train,y_test = train_test_split(images,classNo,test_size=testRatio)$/;"	v
+X_train	src/OCR_CNN_Trainning.py	/^X_train,X_validation,y_train,y_validation = train_test_split(X_train,y_train,test_size=valRatio)$/;"	v
+X_train	src/OCR_CNN_Trainning.py	/^X_train= np.array(list(map(preProcessing,X_train)))$/;"	v
+X_validation	src/OCR_CNN_Trainning.py	/^X_train,X_validation,y_train,y_validation = train_test_split(X_train,y_train,test_size=valRatio)$/;"	v
+X_validation	src/OCR_CNN_Trainning.py	/^X_validation = X_validation.reshape(X_validation.shape[0],X_validation.shape[1],X_validation.sha/;"	v
+X_validation	src/OCR_CNN_Trainning.py	/^X_validation= np.array(list(map(preProcessing,X_validation)))$/;"	v
+__init__	src/demo.py	/^    def __init__(self):$/;"	m	class:App
+accessBinary	src/DigitFinder.py	/^def accessBinary(img, threshold=170):$/;"	f
+accessPiexl	src/DigitFinder.py	/^def accessPiexl(img):$/;"	f
+app	src/demo.py	/^app = App()$/;"	v
+batchSizeVal	src/OCR_CNN_Trainning.py	/^batchSizeVal= 6$/;"	v
+biggest	src/Sudoku.py	/^    biggest = reframe(biggest)$/;"	v
+biggest	src/Sudoku.py	/^biggest, max_area = biggest_contour(contours) $/;"	v
+biggest_contour	src/Sudoku.py	/^def biggest_contour(contours):$/;"	f
+borders	src/DigitFinder.py	/^    borders = findBorderContours(path)$/;"	v
+box	Contors_Line_Finding.py	/^    box = [int(p) for p in box]$/;"	v
+cell_preprocessing	src/Sudoku.py	/^def cell_preprocessing(cell):$/;"	f
+cell_preprocessing2	src/Sudoku.py	/^def cell_preprocessing2(cell):$/;"	f
+cells	src/Sudoku.py	/^    cells = crop_cell(main_board)$/;"	v
+cells	src/Sudoku.py	/^    cells = crop_cell2(main_board)$/;"	v
+change_gray	src/DigitFinder.py	/^def change_gray(img):$/;"	f
+check_box	src/solver_utils.py	/^def check_box(grid, x, y) -> bool:$/;"	f	typeref:typename:bool
+check_col	src/solver_utils.py	/^def check_col(grid, x) -> bool:$/;"	f	typeref:typename:bool
+check_location	src/solver_utils.py	/^def check_location(grid, x, y) -> bool:$/;"	f	typeref:typename:bool
+check_row	src/solver_utils.py	/^def check_row(grid, y) -> bool:$/;"	f	typeref:typename:bool
+check_valid	src/solver_utils.py	/^def check_valid(grid) -> bool:$/;"	f	typeref:typename:bool
+choose_new_state	src/SA.py	/^def choose_new_state (current_sudoku, fixed_sudoku, block, sigma):$/;"	f
+choose_number_of_itterations	src/SA.py	/^def choose_number_of_itterations(fixed_sudoku):$/;"	f
+classNo	src/OCR_CNN_Trainning.py	/^classNo = []    # LIST CONTAINING ALL THE CORRESPONDING CLASS ID OF IMAGES $/;"	v
+classNo	src/OCR_CNN_Trainning.py	/^classNo = np.array(classNo)$/;"	v
+classify_handwriting	src/demo.py	/^    def classify_handwriting(self):$/;"	m	class:App
+clear_all	src/demo.py	/^    def clear_all(self):$/;"	m	class:App
+cm	src/DigitRecogniser.py	/^cm = tf.math.confusion_matrix(labels = y_test_labels, predictions = y_predicted_labels)$/;"	v
+compute_initial_sigma	src/SA.py	/^def compute_initial_sigma (sudoku, fixed_sudoku, blocks):$/;"	f
+con	src/constraint_solver.py	/^import constraint as con$/;"	I	nameref:module:constraint
+contours	Contors_Line_Finding.py	/^contours = find_all_contours(image_threshold)$/;"	v
+contours	src/Sudoku.py	/^contours = find_all_contours(image_threshold)$/;"	v
+convert_dict	src/constraint_solver.py	/^def convert_dict(d):$/;"	f
+convert_sudoku	src/Speed_Test.py	/^def convert_sudoku(sudoku):$/;"	f
+count	src/OCR_CNN_Trainning.py	/^count = 0$/;"	v
+create_list_3x3_blocks	src/SA.py	/^def create_list_3x3_blocks ():$/;"	f
+crop_cell	src/Sudoku.py	/^def crop_cell(img):$/;"	f
+crop_cell2	src/Sudoku.py	/^def crop_cell2(main_board):$/;"	f
+curImg	src/OCR_CNN_Trainning.py	/^        curImg = cv2.imread(path+"\/"+str(x)+"\/"+y)$/;"	v
+curImg	src/OCR_CNN_Trainning.py	/^        curImg = cv2.resize(curImg,(28,28))$/;"	v
+dataGen	src/OCR_CNN_Trainning.py	/^dataGen = ImageDataGenerator(width_shift_range=0.1,$/;"	v
+digit_component	src/Sudoku.py	/^def digit_component(image):$/;"	f
+digit_enhancement	src/Sudoku.py	/^def digit_enhancement(cell):$/;"	f
+digits	src/Sudoku.py	/^    digits, probs = predect_digits(cells, model)$/;"	v
+digits	src/Sudoku.py	/^    digits= np.asanyarray(digits)$/;"	v
+display_numbers	src/Sudoku.py	/^def display_numbers(img,numbers,color = (255, 255, 255)):$/;"	f
+drawGrid	src/Sudoku.py	/^def drawGrid(img):$/;"	f
+draw_lines	src/demo.py	/^    def draw_lines(self, event):$/;"	m	class:App
+enum_errors	src/error_checking.py	/^def enum_errors(error_log_probs):$/;"	f
+enum_grids	src/error_checking.py	/^def enum_grids(probabilities):$/;"	f
+epochsVal	src/OCR_CNN_Trainning.py	/^epochsVal = 10$/;"	v
+error	src/Sudoku.py	/^import error_checking as error$/;"	I	nameref:module:error_checking
+extractPeek	src/DigitFinder.py	/^def extractPeek(array_vals, min_vals=10, min_rect=20):$/;"	f
+findBorderContours	src/DigitFinder.py	/^def findBorderContours(path, maxArea=100):$/;"	f
+findBorderHistogram	src/DigitFinder.py	/^def findBorderHistogram(path):$/;"	f
+find_all_contours	Contors_Line_Finding.py	/^def find_all_contours(image_threshold):$/;"	f
+find_all_contours	src/Sudoku.py	/^def find_all_contours(image_threshold):$/;"	f
+find_lines	Contors_Line_Finding.py	/^def find_lines(image_threshold, original_image_min_side):$/;"	f
+find_solution	src/Sudoku.py	/^        find_solution = True$/;"	v
+find_solution	src/Sudoku.py	/^    find_solution = False$/;"	v
+find_sudoku	Contors_Line_Finding.py	/^def find_sudoku(contours, lines):$/;"	f
+fix_sudoku_values	src/SA.py	/^def fix_sudoku_values(fixed_sudoku):$/;"	f
+flag	src/Sudoku.py	/^flag = False$/;"	v
+flag	src/Sudoku.py	/^flag = True$/;"	v
+flat_array	src/Sudoku.py	/^        flat_array =[]$/;"	v
+get_best_shift	src/Sudoku.py	/^def get_best_shift(img):$/;"	f
+get_box	src/solver_utils.py	/^def get_box(grid, x, y):$/;"	f
+get_errors	src/error_checking.py	/^def get_errors(grid):$/;"	f
+get_probable_grid	src/error_checking.py	/^def get_probable_grid(grid, errors, probs):$/;"	f
+gray	src/DigitRecogniserTest.py	/^gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)$/;"	v
+gray	src/DigitRecogniserTest.py	/^gray = ~gray$/;"	v
+grid	src/Sudoku.py	/^            grid = error.remove_errors(grid, errors)$/;"	v
+grid	src/Sudoku.py	/^    grid = np.reshape(digits, [9, 9]).tolist()$/;"	v
+has_appropriate_length	Contors_Line_Finding.py	/^def has_appropriate_length(line, rectangle, threshold):$/;"	f
+history	src/OCR_CNN_Trainning.py	/^history = model.fit_generator(dataGen.flow(X_train,y_train,$/;"	v
+image	src/DigitFinder.py	/^image = accessBinary(image)$/;"	v
+image	src/DigitFinder.py	/^image = accessPiexl(image)$/;"	v
+image	src/DigitFinder.py	/^image = change_gray(image)$/;"	v
+image	src/DigitFinder.py	/^image = cv2.imread('numbers\/numbers.jpg')$/;"	v
+imageDimensions	src/OCR_CNN_Trainning.py	/^imageDimensions= (28,28,3)$/;"	v
+image_preprocessing	Contors_Line_Finding.py	/^def image_preprocessing(image):$/;"	f
+image_preprocessing	src/Sudoku.py	/^def image_preprocessing(image):$/;"	f
+image_size	src/DigitRecogniser.py	/^image_size = 28$/;"	v
+image_threshold	Contors_Line_Finding.py	/^image_threshold = image_preprocessing(img)$/;"	v
+image_threshold	src/Sudoku.py	/^image_threshold = image_preprocessing(img)$/;"	v
+images	src/OCR_CNN_Trainning.py	/^images = []     # LIST CONTAINING ALL THE IMAGES $/;"	v
+images	src/OCR_CNN_Trainning.py	/^images = np.array(images)$/;"	v
+img	Contors_Line_Finding.py	/^img = original_image$/;"	v
+img	src/DigitRecogniserTest.py	/^img = cv2.imread('numbers\/savedImage2.jpg')$/;"	v
+img	src/Sudoku.py	/^img = cv2.imread(img_path)$/;"	v
+img	src/Sudoku.py	/^img = cv2.resize(img, (img_w, img_h))$/;"	v
+img_biggest_contour	src/Sudoku.py	/^img_biggest_contour = img.copy() $/;"	v
+img_contours	Contors_Line_Finding.py	/^    img_contours = cv2.rectangle(img_contours, (box[0], box[1]), (box[0]+box[2],$/;"	v
+img_contours	Contors_Line_Finding.py	/^img_contours = img.copy()$/;"	v
+img_contours	src/Sudoku.py	/^img_contours = img.copy() $/;"	v
+img_detected_digits	src/Sudoku.py	/^    img_detected_digits = display_numbers(img_detected_digits, digits, color=(255, 255, 255))$/;"	v
+img_detected_digits	src/Sudoku.py	/^    img_detected_digits = drawGrid(img_detected_digits)$/;"	v
+img_detected_digits	src/Sudoku.py	/^    img_detected_digits = img_pipeline.copy()$/;"	v
+img_h	Contors_Line_Finding.py	/^img_h = original_image_height$/;"	v
+img_h	src/Sudoku.py	/^img_h = 540$/;"	v
+img_lines	Contors_Line_Finding.py	/^    img_lines = cv2.line(img_lines, (line[0][0], line[0][1]),$/;"	v
+img_lines	Contors_Line_Finding.py	/^img_lines = img.copy()$/;"	v
+img_path	Contors_Line_Finding.py	/^img_path = '98.jpg'$/;"	v
+img_path	src/Sudoku.py	/^img_path = 'input\/2.jpg'$/;"	v
+img_pipeline	Contors_Line_Finding.py	/^img_pipeline = img_stack(steps_demo, 0.5)$/;"	v
+img_pipeline	Contors_Line_Finding.py	/^img_pipeline = np.zeros((img_w, img_h, 3), np.uint8)$/;"	v
+img_pipeline	src/Sudoku.py	/^    img_pipeline = img_stack(steps_demo, 1)$/;"	v
+img_pipeline	src/Sudoku.py	/^img_pipeline = np.zeros((img_w, img_h, 3), np.uint8) $/;"	v
+img_pipeline2	src/Sudoku.py	/^    img_pipeline2 = img_stack(steps_demo2, 1)$/;"	v
+img_stack	Contors_Line_Finding.py	/^def img_stack(img_array,scale):$/;"	f
+img_stack	src/Sudoku.py	/^def img_stack(img_array,scale):$/;"	f
+img_sudoku_contour	Contors_Line_Finding.py	/^img_sudoku_contour = cv2.rectangle(img_sudoku_contour,$/;"	v
+img_sudoku_contour	Contors_Line_Finding.py	/^img_sudoku_contour = img.copy()$/;"	v
+img_w	Contors_Line_Finding.py	/^img_w = original_image_width$/;"	v
+img_w	src/Sudoku.py	/^img_w = 540$/;"	v
+img_warp	src/Sudoku.py	/^    img_warp = cv2.cvtColor(cv2.warpPerspective(img, matrix, (img_h, img_w)),cv2.COLOR_BGR2GRAY)$/;"	v
+img_warp_color	src/Sudoku.py	/^    img_warp_color = cv2.warpPerspective(solution_draw, matrix, (img_w, img_h))$/;"	v
+img_warp_color	src/Sudoku.py	/^    img_warp_color = img.copy()$/;"	v
+inv_perspective	src/Sudoku.py	/^    inv_perspective = cv2.addWeighted(img_warp_color, 1, img, 0.5, 1)$/;"	v
+is_inside	Contors_Line_Finding.py	/^def is_inside(line, rectangle):$/;"	f
+lines	Contors_Line_Finding.py	/^lines = find_lines(image_threshold, original_image_min_side)$/;"	v
+lines	src/sampler.py	/^        lines = csv.reader(f)$/;"	v
+main_board	src/Sudoku.py	/^    main_board = prepossessing_for_model(img_warp)$/;"	v
+matrix	src/Sudoku.py	/^    matrix = cv2.getPerspectiveTransform(pts_biggest_contour, pts_img) $/;"	v
+matrix	src/Sudoku.py	/^    matrix = cv2.getPerspectiveTransform(pts_img, pts_biggest_contour)  $/;"	v
+max_area	src/Sudoku.py	/^biggest, max_area = biggest_contour(contours) $/;"	v
+mnist	src/DigitRecogniser.py	/^mnist = tf.keras.datasets.mnist$/;"	v
+model	src/DigitFinder.py	/^model = load_model(model_path)$/;"	v
+model	src/DigitRecogniser.py	/^model = Sequential()$/;"	v
+model	src/DigitRecogniserTest.py	/^model = load_model(model_path)$/;"	v
+model	src/OCR_CNN_Trainning.py	/^model = myModel()$/;"	v
+model	src/Sudoku.py	/^    model = load_model(model_path)$/;"	v
+model	src/demo.py	/^model = load_model(model_path)$/;"	v
+model_path	src/DigitFinder.py	/^model_path ='model\/model.h5'$/;"	v
+model_path	src/DigitRecogniserTest.py	/^model_path ='model\/model.h5'$/;"	v
+model_path	src/Sudoku.py	/^model_path ='model\/model13.h5' # TODO change to model 15!$/;"	v
+model_path	src/demo.py	/^model_path ='model\/model11.h5'$/;"	v
+myList	src/OCR_CNN_Trainning.py	/^myList = os.listdir(path)$/;"	v
+myModel	src/OCR_CNN_Trainning.py	/^def myModel():$/;"	f
+myPicList	src/OCR_CNN_Trainning.py	/^    myPicList = os.listdir(path+"\/"+str(x))$/;"	v
+newimg	src/DigitRecogniserTest.py	/^newimg = np.array(newimg).reshape(-1, 28, 28, 1)$/;"	v
+newimg	src/DigitRecogniserTest.py	/^newimg = tf.keras.utils.normalize(resized, axis = 1)$/;"	v
+noOfClasses	src/OCR_CNN_Trainning.py	/^noOfClasses = len(myList)$/;"	v
+np	Contors_Line_Finding.py	/^import numpy as np$/;"	I	nameref:module:numpy
+np	src/DigitFinder.py	/^import numpy as np$/;"	I	nameref:module:numpy
+np	src/DigitRecogniser.py	/^import numpy as np$/;"	I	nameref:module:numpy
+np	src/DigitRecogniserTest.py	/^import numpy as np$/;"	I	nameref:module:numpy
+np	src/OCR_CNN_Trainning.py	/^import numpy as np$/;"	I	nameref:module:numpy
+np	src/SA.py	/^import numpy as np$/;"	I	nameref:module:numpy
+np	src/Speed_Test.py	/^import numpy as np$/;"	I	nameref:module:numpy
+np	src/Sudoku.py	/^import numpy as np$/;"	I	nameref:module:numpy
+np	src/demo.py	/^import numpy as np$/;"	I	nameref:module:numpy
+numOfSamples	src/OCR_CNN_Trainning.py	/^numOfSamples= []$/;"	v
+num_set	src/sampler.py	/^num_set = set(nums)$/;"	v
+number_0f_errors	src/SA.py	/^def number_0f_errors(sudoku):$/;"	f
+nums	src/sampler.py	/^nums = sample(range(1, 1000001), 1000)$/;"	v
+original_image	Contors_Line_Finding.py	/^original_image = cv2.imread(img_path)$/;"	v
+original_image_height	Contors_Line_Finding.py	/^original_image_height = img.shape[0]$/;"	v
+original_image_min_side	Contors_Line_Finding.py	/^original_image_min_side = min(original_image_height, original_image_width)$/;"	v
+original_image_width	Contors_Line_Finding.py	/^original_image_width = img.shape[1]$/;"	v
+out_writer	src/sampler.py	/^        out_writer = csv.writer(out)$/;"	v
+path	src/DigitFinder.py	/^    path = 'numbers\/numbers.jpg'          $/;"	v
+path	src/OCR_CNN_Trainning.py	/^path = 'numbers\/train2'$/;"	v
+place_holder_digits	src/Sudoku.py	/^            place_holder_digits = np.where(np.array(grid).reshape([81]) > 0, 0, 1)$/;"	v
+place_holder_digits	src/Sudoku.py	/^    place_holder_digits = np.where(digits > 0, 0, 1)$/;"	v
+plt	src/DigitFinder.py	/^import matplotlib.pyplot as plt$/;"	I	nameref:module:matplotlib.pyplot
+plt	src/DigitRecogniser.py	/^import matplotlib.pyplot as plt$/;"	I	nameref:module:matplotlib.pyplot
+plt	src/DigitRecogniserTest.py	/^import matplotlib.pyplot as plt$/;"	I	nameref:module:matplotlib.pyplot
+plt	src/OCR_CNN_Trainning.py	/^import matplotlib.pyplot as plt$/;"	I	nameref:module:matplotlib.pyplot
+plt	src/Speed_Test.py	/^import matplotlib.pyplot as plt$/;"	I	nameref:module:matplotlib.pyplot
+point_is_inside	Contors_Line_Finding.py	/^def point_is_inside(x, y, rectangle):$/;"	f
+preProcessing	src/OCR_CNN_Trainning.py	/^def preProcessing(img):$/;"	f
+predect_digits	src/Sudoku.py	/^def predect_digits(cells,model):$/;"	f
+predict_digit	src/demo.py	/^def predict_digit(img):$/;"	f
+predictions	src/DigitRecogniser.py	/^predictions = model.predict(x_test_data)$/;"	v
+predictions	src/DigitRecogniserTest.py	/^predictions = model.predict(newimg)$/;"	v
+prepossessing_for_model	src/Sudoku.py	/^def prepossessing_for_model(main_board):$/;"	f
+print_grid	src/solver_utils.py	/^def print_grid(grid):$/;"	f
+probs	src/Sudoku.py	/^            probs = [probs[i][0] for i in range(81)]$/;"	v
+probs	src/Sudoku.py	/^    digits, probs = predect_digits(cells, model)$/;"	v
+proposed_state	src/SA.py	/^def proposed_state (sudoku, fixed_sudoku, blocks):$/;"	f
+pts_biggest_contour	src/Sudoku.py	/^    pts_biggest_contour = np.float32(biggest) $/;"	v
+pts_img	src/Sudoku.py	/^    pts_img = np.float32([[0, 0],[img_w, 0], [0, img_h],[img_w, img_h]])$/;"	v
+randomly_fill_3x3_blocks	src/SA.py	/^def randomly_fill_3x3_blocks(sudoku, blocks):$/;"	f
+read_grid	src/solver_utils.py	/^def read_grid(filename: str):$/;"	f
+reader	src/Speed_Test.py	/^    reader = csv.reader(f)$/;"	v
+reframe	src/Sudoku.py	/^def reframe(points):$/;"	f
+remove_errors	src/error_checking.py	/^def remove_errors(grid, errors):$/;"	f
+reorder	Contors_Line_Finding.py	/^def reorder(points):$/;"	f
+resized	src/DigitRecogniserTest.py	/^resized = cv2.resize(gray, (28, 28), interpolation =cv2.INTER_AREA)$/;"	v
+score	src/OCR_CNN_Trainning.py	/^score = model.evaluate(X_test,y_test,verbose=0)$/;"	v
+shift	src/Sudoku.py	/^def shift(img, sx, sy):$/;"	f
+showResults	src/DigitFinder.py	/^def showResults(path, borders, results=None):$/;"	f
+sn	src/DigitRecogniser.py	/^import seaborn as sn$/;"	I	nameref:module:seaborn
+solution	src/Sudoku.py	/^        solution = brute_solver.solve(grid)$/;"	v
+solution	src/Sudoku.py	/^    solution=[]$/;"	v
+solution_draw	src/Sudoku.py	/^        solution_draw = display_numbers(solution_draw,solved_digits, color=(0, 255, 255))$/;"	v
+solution_draw	src/Sudoku.py	/^    solution_draw = drawGrid(solution_draw)$/;"	v
+solution_draw	src/Sudoku.py	/^    solution_draw = img_pipeline.copy()$/;"	v
+solve	src/SA.py	/^def solve(sudoku):$/;"	f
+solve	src/brute_solver.py	/^def solve(grid):$/;"	f
+solve	src/constraint_solver.py	/^def solve(grid):$/;"	f
+solved_digits	src/Sudoku.py	/^        solved_digits = flat_array * place_holder_digits$/;"	v
+startingSudoku	src/SA.py	/^startingSudoku = """$/;"	v
+stepsPerEpochVal	src/OCR_CNN_Trainning.py	/^stepsPerEpochVal = 2000$/;"	v
+steps_demo	Contors_Line_Finding.py	/^steps_demo = ([img, image_threshold, img_lines, img_contours, img_sudoku_contour])$/;"	v
+steps_demo	src/Sudoku.py	/^    steps_demo = ([img,main_board, img_detected_digits,img_warp_color])$/;"	v
+steps_demo2	src/Sudoku.py	/^    steps_demo2 = ([cells])$/;"	v
+sudoku	src/SA.py	/^sudoku = np.array([[int(i) for i in line] for line in startingSudoku.split()])$/;"	v
+sudoku_contour	Contors_Line_Finding.py	/^sudoku_contour = find_sudoku(contours, lines)$/;"	v
+sudoku_h_cells	Contors_Line_Finding.py	/^sudoku_h_cells = 9$/;"	v
+sudoku_h_cells	src/Sudoku.py	/^sudoku_h_cells = 9$/;"	v
+sudoku_v_cells	Contors_Line_Finding.py	/^sudoku_v_cells = 9$/;"	v
+sudoku_v_cells	src/Sudoku.py	/^sudoku_v_cells = 9$/;"	v
+sum_error_row_column	src/SA.py	/^def sum_error_row_column(row, column, sudoku):$/;"	f
+sum_of_one_block	src/SA.py	/^def sum_of_one_block (sudoku, block):$/;"	f
+switch_cells	src/SA.py	/^def switch_cells(sudoku, cells_to_switch):$/;"	f
+testRatio	src/OCR_CNN_Trainning.py	/^testRatio = 0.2$/;"	v
+test_input	src/error_checking.py	/^test_input = [[1, 2, 3], [0, 7, 8], [3], [2, 4]]$/;"	v
+tests	src/Speed_Test.py	/^    tests = []$/;"	v
+tf	src/DigitFinder.py	/^import tensorflow as tf$/;"	I	nameref:module:tensorflow
+tf	src/DigitRecogniser.py	/^import tensorflow as tf$/;"	I	nameref:module:tensorflow
+tf	src/DigitRecogniserTest.py	/^import tensorflow as tf$/;"	I	nameref:module:tensorflow
+tf	src/Sudoku.py	/^import tensorflow as tf$/;"	I	nameref:module:tensorflow
+times	src/Speed_Test.py	/^times = {"brute":[], "constraint":[], "anneal":[]}$/;"	v
+tk	src/demo.py	/^import tkinter as tk$/;"	I	nameref:module:tkinter
+transMNIST	src/DigitFinder.py	/^def transMNIST(path, borders, size=(28, 28)):$/;"	f
+two_random_cells_within_block	src/SA.py	/^def two_random_cells_within_block(fixed_sudoku, block):$/;"	f
+util	src/Speed_Test.py	/^import solver_utils as util$/;"	I	nameref:module:solver_utils
+util	src/error_checking.py	/^import solver_utils as util $/;"	I	nameref:module:solver_utils
+valRatio	src/OCR_CNN_Trainning.py	/^valRatio = 0.2$/;"	v
+x_test_data	src/DigitRecogniser.py	/^x_test_data = np.array(x_test_data).reshape(-1, image_size, image_size, 1)$/;"	v
+x_test_data	src/DigitRecogniser.py	/^x_test_data = tf.keras.utils.normalize(x_test_data, axis=1)$/;"	v
+x_training_data	src/DigitRecogniser.py	/^x_training_data = np.array(x_training_data).reshape(-1, image_size, image_size, 1)$/;"	v
+x_training_data	src/DigitRecogniser.py	/^x_training_data = tf.keras.utils.normalize(x_training_data, axis=1) $/;"	v
+y_predicted_labels	src/DigitRecogniser.py	/^y_predicted_labels = [np.argmax(i) for i in predictions]$/;"	v
+y_test	src/OCR_CNN_Trainning.py	/^X_train,X_test,y_train,y_test = train_test_split(images,classNo,test_size=testRatio)$/;"	v
+y_test	src/OCR_CNN_Trainning.py	/^y_test = to_categorical(y_test,noOfClasses)$/;"	v
+y_train	src/OCR_CNN_Trainning.py	/^X_train,X_test,y_train,y_test = train_test_split(images,classNo,test_size=testRatio)$/;"	v
+y_train	src/OCR_CNN_Trainning.py	/^X_train,X_validation,y_train,y_validation = train_test_split(X_train,y_train,test_size=valRatio)$/;"	v
+y_train	src/OCR_CNN_Trainning.py	/^y_train = to_categorical(y_train,noOfClasses)$/;"	v
+y_validation	src/OCR_CNN_Trainning.py	/^X_train,X_validation,y_train,y_validation = train_test_split(X_train,y_train,test_size=valRatio)$/;"	v
+y_validation	src/OCR_CNN_Trainning.py	/^y_validation = to_categorical(y_validation,noOfClasses)$/;"	v

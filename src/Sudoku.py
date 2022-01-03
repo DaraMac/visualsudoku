@@ -1,5 +1,4 @@
 import cv2
-import imutils
 import numpy as np
 import math
 from scipy import ndimage
@@ -143,7 +142,7 @@ def predect_digits(cells,model):
     for cell in cells:
         new_cells = cell_preprocessing2(cell)
         predictions = model.predict(new_cells)
-        index = model.predict_classes(new_cells)
+        index = np.argmax(model.predict(new_cells), axis=-1)
         probability_value = np.amax(predictions, axis = -1)
         #print(index, probability_value)
         if probability_value > 0.8:
@@ -306,7 +305,7 @@ def crop_cell2(main_board):
 
 
 
-img_path = 'input/9.jpg'
+img_path = 'input/3.jpg'
 model_path ='model/model13.h5'
 img_h = 540
 img_w = 540

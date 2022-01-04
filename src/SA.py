@@ -165,6 +165,10 @@ def solve(sudoku):
     return(tmpSudoku)
 
 
+# =============================================================================
 # solution = solve_sudoku(sudoku)
 # print(number_0f_errors(solution))
 # print(solution)
+# 
+# 
+# =============================================================================

@@ -5,6 +5,7 @@ from scipy import ndimage
 import os
 import brute_solver
 import SA
+import GA
 import tensorflow as tf
 import time
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
@@ -141,8 +142,7 @@ def predect_digits(cells,model):
     for cell in cells:
         new_cells = cell_preprocessing2(cell)
         predictions = model.predict(new_cells)
-        index = model.predict_classes(new_cells) # this is deprecated in tensorflow
-        # index = np.argmax(model.predict(new_cells), axis=-1) # this also gives invalid value in double_scalars
+        index = np.argmax(model.predict(new_cells), axis=-1)
         probability_value = np.amax(predictions, axis = -1)
         #print(index, probability_value)
         if probability_value > 0.8:
@@ -305,8 +305,8 @@ def crop_cell2(main_board):
 
 
 
-img_path = 'input/13.jpg'
-model_path ='model/model.h5'
+img_path = 'input/3.jpg'
+model_path ='model/model13.h5'
 img_h = 540
 img_w = 540
 
@@ -345,24 +345,58 @@ if biggest.size != 0:
     solution_draw = img_pipeline.copy()
     digits = predect_digits(cells, model)
     print(digits)
+    
     digits= np.asanyarray(digits)
+    digits_matrix = np.reshape(digits,[9, 9])
     
     img_detected_digits = img_pipeline.copy()
     img_detected_digits = display_numbers(img_detected_digits, digits, color=(255, 255, 255))
     
     place_holder_digits = np.where(digits > 0, 0, 1)
     print(place_holder_digits)
-    print(np.reshape(digits,[9, 9]))
+    
+   
+    print(digits_matrix)
     solution=[]
     find_solution = False
     try:
-        start_time = time.time()
-        solution = brute_solver.solve(np.reshape(digits,[9, 9]))
-        print("--- %s seconds for BF---" % (time.time() - start_time))
 
+# =============================================================================
+#         print("before BF:")
+#         print(digits_matrix)
+#         start_time = time.time()
+#         solution = brute_solver.solve(digits_matrix)
+#         print("--- %s seconds for BF---" % (time.time() - start_time))
+# =============================================================================
+
+
+# =============================================================================
+#         print("before SA:")
+#         print(digits_matrix)
+#         start_time = time.time()
+#         solution = SA.solve_sudoku(digits_matrix)
+#         print("--- %s seconds for SA--- " % (time.time() - start_time))
+#         
+# =============================================================================
+
+
+        print("before GA:")
+        print(digits_matrix)
+        sudoku = GA.Sudoku()
+        
+        sudoku.load(digits_matrix)
         start_time = time.time()
-        solution = SA.solve_sudoku(np.reshape(digits,[9, 9]))
-        print("--- %s seconds for SA--- " % (time.time() - start_time))
+        generation, solution = sudoku.solve()
+        if (solution):
+            if generation == -1:
+                print("wrong inputs")
+            elif generation == -2:
+                print("no solution found")
+            else:
+                print("--- %s seconds for GA--- " % (time.time() - start_time))
+
+        solution = solution.values
+
         print(solution)
 
         find_solution = True

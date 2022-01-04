@@ -12,10 +12,12 @@ model_path ='model/model.h5'
 model = load_model(model_path)
 
 
-
+#Convert to grayscale image
 def change_gray(img):
     # img = cv2.imread(img_path)
+    # get w and h from input image
     width, height = img.shape[:2][::-1]
+    # resize image for better view
     img_resize = cv2.resize(img, (int(width * 0.5), int(height * 0.5)), interpolation=cv2.INTER_CUBIC)
     print("img_reisze shape:{}".format(np.shape(img_resize)))
 
@@ -24,6 +26,7 @@ def change_gray(img):
     
     return img_gray
 
+#Inverted grayscale image, reverse the black and white threshold, process the pixels one by one
 def accessPiexl(img):
     # change_gray(img)
     height = img.shape[0]
@@ -33,63 +36,86 @@ def accessPiexl(img):
            img[i][j] = 255 - img[i][j]
     return img
 
-
+#Inverted binarized image
 def accessBinary(img, threshold=170):
     img = accessPiexl(img)
 
     kernel = np.ones((3, 3), np.uint8)
+    # filter
     # img = cv2.medianBlur(img, 3)
     img = cv2.GaussianBlur(img, (3, 3), 0)
     # img = cv2.medianBlur(img, 3)
 
-
+    # remove frizz on the edges
     img = cv2.erode(img, kernel, iterations=1)
 
+    # use threshold function for binarization
     # _, img = cv2.threshold(img, threshold, 0, cv2.THRESH_TOZERO)
     img = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 7, -9)
 
+    # edge expansion
     img = cv2.dilate(img, kernel, iterations=1)
     return img
 
+# Scan the rows and columns
+# Starting from the row, calculate the sum of the pixel values ​​of each row,
+# if they are all black then the sum is 0 (there may be noise, we can set a threshold to filter the noise),
+# Lines with fonts are non-zero, we can get the value of line boundary by filtering the boundary according to this picture
+# With the above concept, we can scan the rows and columns, e.g. 0, non-zero, non-zero… non-zero, 0, to determine the point of the row and column to find the border of the number
+
+# Find the vertices based on the long vector
 def extractPeek(array_vals, min_vals=10, min_rect=20):
     extrackPoints = []
     startPoint = None
     endPoint = None
     for i, point in enumerate(array_vals):
         #enumerate() 
+        #If the white point of the line is greater than the lower limit, and has not appeared, then this is the line starting point.
         if point > min_vals and startPoint == None:
             startPoint = i
+        #If the white point of the line is lower than the lower limit, and has appeared, then this is the line end point.
         elif point < min_vals and startPoint != None:
             endPoint = i
 
+        #If both starting point and end point are detected, store them
         if startPoint != None and endPoint != None:
             extrackPoints.append((startPoint, endPoint))
             startPoint = None
             endPoint = None
-
+            
+    #Remove some noise
     for point in extrackPoints:
         if point[1] - point[0] < min_rect:
             extrackPoints.remove(point)
     return extrackPoints
 
-
+# Find the edge, return the upper left corner and the lower right corner of the frame (using the histogram to find the edge algorithm (line alignment required))
 def findBorderHistogram(path):
     borders = []
+    #load as grayscale image
     img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
+    #Inverted binarized image
     img = accessBinary(img)                     
-
+    #Line scan
     hori_vals = np.sum(img, axis=1)
 
-    hori_points = extractPeek(hori_vals)
 
+    hori_points = extractPeek(hori_vals)
+    
+    # for each row, scan column
+    # extra determined row
     for hori_point in hori_points:
+        
         extractImg = img[hori_point[0]:hori_point[1], :]
         vec_vals = np.sum(extractImg, axis=0)
         vec_points = extractPeek(vec_vals, min_rect=10)
        
+        #add border
         for vect_point in vec_points:
             border = [(vect_point[0], hori_point[0]), (vect_point[1], hori_point[1])]
-            
+                        
+            #vect_point[0]the left border of a digit，vect_point[1]the right border of a digit
+            # hori_point[0]the upper border of a digit，hori_point[1]the bottom border of a digit
             borders.append(border)
     return borders
 
@@ -131,33 +157,6 @@ def findBorderContours(path, maxArea=100):
     return borders
 
 
-def transMNIST(path, borders, size=(28, 28)):
-    imgData = np.zeros((len(borders), size[0], size[0], 1), dtype='uint8')
-    img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
-    img = accessBinary(img)
-    for i, border in enumerate(borders):
-        borderImg = img[border[0][1]:border[1][1], border[0][0]:border[1][0]]
-        h = abs(border[0][1] - border[1][1])#
-        # w = abs(border[0][0] - border[1][0])#
-
-        extendPiexl = (max(borderImg.shape) - min(borderImg.shape)) // 2
-        h_extend = h // 5
-        # print(h_extend)
-        targetImg = cv2.copyMakeBorder(borderImg, h_extend, h_extend, int(extendPiexl*1.1), int(extendPiexl*1.1), cv2.BORDER_CONSTANT)
-        # targetImg = cv2.copyMakeBorder(borderImg, 20, 20, h_extend, h_extend,cv2.BORDER_CONSTANT)
-        # targetImg = cv2.resize(borderImg, size)
-
-        # if w < (h//3):
-        #     targetImg = cv2.copyMakeBorder(targetImg, 4, 4, 20, 20, cv2.BORDER_CONSTANT
-        #     print("1")
-        # else:
-        #     targetImg = cv2.copyMakeBorder(targetImg, 4, 4, 6, 6, cv2.BORDER_CONSTANT)
-        targetImg = cv2.resize(targetImg, size)
-        # cv2.imshow('test', targetImg)
-        # cv2.waitKey(0)
-        targetImg = np.expand_dims(targetImg, axis=-1)
-        imgData[i] = targetImg
-    return imgData
 
 
 

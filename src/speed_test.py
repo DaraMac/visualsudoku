@@ -17,24 +17,18 @@ def convert_sudoku(sudoku):
     sudoku_list = [list(map(int, sudoku[i*9:i*9+9])) for i in range(9)]
     return sudoku_list
 
+# format of both test set csvs is: quizzes, solutions
 with open("small_test_set.csv", newline='') as f:
+# with open("test_set.csv", newline='') as f:
     reader = csv.reader(f)
     tests = []
     for line in reader:
         tests.append(convert_sudoku(line[0]))
 
 
-# with open("test_set.csv", newline='') as f:
-#     reader = csv.reader(f)
-#     tests = []
-#     for line in reader:
-#         tests.append(convert_sudoku(line[0]))
-
-
 times = {"brute":[], "constraint":[], "anneal":[]}
-# choosing 100 as that is the length of the small_test_set file
-for i in range(100):
-# for i in range(1000): # for the larger test set file
+for i in range(100): # the length of small_test_set.csv
+# for i in range(1000): # for the larger test_set.csv file
     times["brute"].append(timeit.timeit(f"brute_solver.solve(tests[{i}])", globals=globals(), number=1))
     times["constraint"].append(timeit.timeit(f"constraint_solver.solve(tests[{i}])", globals=globals(), number=1))
     times["anneal"].append(timeit.timeit(f"SA.solve(p)", setup=f"p = np.array(tests[{i}])", globals=globals(), number=1))
@@ -46,7 +40,6 @@ print(f"Simulated Annealing:\nMean {mean(times['anneal'])}\nMax {max(times['anne
 brute = times["brute"]
 constraint = times["constraint"]
 anneal = times["anneal"]
-
 
 ######################################################################
 # Graphs

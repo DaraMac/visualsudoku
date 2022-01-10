@@ -40,6 +40,7 @@ print(f"Simulated Annealing:\nMean {mean(times['anneal'])}\nMax {max(times['anne
 brute = times["brute"]
 constraint = times["constraint"]
 anneal = times["anneal"]
+# genetic = times["genetic"]
 
 ######################################################################
 # Graphs
@@ -82,6 +83,7 @@ anneal = times["anneal"]
 sns.set_theme(style="ticks")
 
 df = pd.DataFrame.from_dict(times)
-sns.pairplot(df)
+p = sns.pairplot(df)
+# p.fig.suptitle("Runtimes over 100 Sudoku") # y= some height>1
 
 plt.show()

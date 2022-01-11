@@ -81,9 +81,27 @@ anneal = times["anneal"]
 # ax3.scatter(anneal, constraint)
 
 sns.set_theme(style="ticks")
+sns.set_palette("Paired")
 
 df = pd.DataFrame.from_dict(times)
-p = sns.pairplot(df)
+
+# p = sns.pairplot(df)
 # p.fig.suptitle("Runtimes over 100 Sudoku") # y= some height>1
+
+# p = sns.boxplot(data=df)
+# p = sns.boxplot(data=df[["constraint", "anneal"]])
+# p = sns.boxplot(data=df[["brute"]])
+
+p = sns.boxenplot(data=df, order=["anneal", "brute", "constraint"])
+# p = sns.boxenplot(data=df[["constraint", "anneal"]])
+p.set(title="Speed tests comparison over 100 random Sudoku", ylabel="Time (seconds)")
+
+# plt.yscale('log')
+# p.set(ylabel="Time (log(seconds))")
+
+# p = sns.violinplot(data=df)
+# p = sns.violinplot(data=df[["constraint", "anneal"]])
+# p = sns.violinplot(data=df[["brute"]])
+# plt.yscale('log')
 
 plt.show()

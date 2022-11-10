@@ -7,4 +7,3 @@ dependencies:
   - matplotlib
   - pandas
   - seaborn
-prefix: /Users/daramac/opt/miniforge3/envs/sudoku
